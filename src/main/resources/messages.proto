@@ -1,0 +1,31 @@
+//protocol buffer compiler and language
+syntax = "proto3";
+//package is namespace for message structure
+package protoMessage;
+//specifies the package for our generated classes to live in
+option java_package = "com.protobuf.message";
+//indicates name of the class enclosing all the types defined in this .proto file
+option java_outer_classname = "ProtoMessage";
+
+message Course {
+  int32 id = 1;
+  string course_name = 2;
+  //need to pass collection of students when use course builder
+  repeated Student student = 3;
+}
+message Student {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  //need to pass collection id numbers here when use student builder
+  repeated PhoneNumber phone = 5;
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+  enum PhoneType {
+    MOBILE = 0;
+    LANDLINE = 1;
+  }
+}
